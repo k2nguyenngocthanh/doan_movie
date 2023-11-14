@@ -1,46 +1,46 @@
-import { Button, Form, Input } from "antd";
+import { Button, Form, Input, message } from "antd";
 import Lottie from "lottie-react";
-import { NavLink } from "react-router-dom";
-import bg_animate from "../asset/login_animate.json"
+import { NavLink, useNavigate } from "react-router-dom";
+import bg_animate from "../asset/login_animate.json";
+import { useDispatch } from "react-redux";
 
-const LoginPage = () =>{
-    // let dispatch=useDispatch();
-    // let navigate=useNavigate()
-    // const onFinish = (values) => {
-    //     console.log('Success:', values);
-    //     userServ
-    //       .postLogin(values)
-    //       .then((res) => {
-    //               console.log(res);
-    //               message.success("Login thành công");
-    //               //Lưu thông tin
-    //               localUserSrv.set(res.data.content);
-    //               dispatch(setLoginAction(res.data.content))
-    //               navigate("/");
+import {setLoginAction,setLoginActionService} from "../Redux/action/userAction";
+import { userServ } from "../Service/userService";
+import { localUserSrv } from "../Service/localService";
 
-    //             })
-    //             .catch((err) => {
-    //              console.log(err);
-    //              message.error("Login thất bại");
-    //             });
-    //   };
-    //   const OnFinishThunk = (values) => {
-    //     let onSuccess=()=> {
-    //       message.success("Login thành công");
-         
-    //       navigate("/");
-    
-    //     }
-    
-    //   dispatch(setLoginActionService(values,onSuccess));
-    
-        
-    //   }
-    //   const onFinishFailed = (errorInfo) => {
-    //     console.log('Failed:', errorInfo);
-        
-    //   };
- return( <div style={{backgroundImage:`url('http://demo1.cybersoft.edu.vn/static/media/backapp.b46ef3a1.jpg')`}} className="h-screen w-screen flex  justify-center items-center">
+
+const LoginPage = () => {
+  let dispatch = useDispatch();
+  let navigate = useNavigate();
+  const onFinish = (values) => {
+    userServ
+      .postLogin(values)
+      .then((res) => {
+        console.log(res);
+        message.success("Login thành công");
+        //Lưu thông tin
+        localUserSrv.set(res.data.content);
+        dispatch(setLoginAction(res.data.content));
+        navigate("/");
+      })
+      .catch((err) => {
+        console.log(err);
+        message.error("Login thất bại");
+      });
+  };
+  const OnFinishThunk = (values) => {
+    let onSuccess = () => {
+      message.success("Login thành công");
+
+      navigate("/");
+    };
+
+    dispatch(setLoginActionService(values, onSuccess));
+  };
+  const onFinishFailed = (errorInfo) => {
+    console.log("Failed:", errorInfo);
+  };
+  return( <div style={{backgroundImage:`url('http://demo1.cybersoft.edu.vn/static/media/backapp.b46ef3a1.jpg')`}} className="h-screen w-screen flex  justify-center items-center">
       <div className="container mx-auto p-5 bg-white rounded flex">
       <div className="w-1/2 h-full">
       <Lottie animationData={bg_animate} loop={true} />
@@ -61,8 +61,8 @@ const LoginPage = () =>{
             initialValues={{
               remember: true,
             }}
-            // onFinish={onFinish}
-            // onFinishFailed={onFinishFailed}
+            onFinish={onFinish}
+            onFinishFailed={onFinishFailed}
             autoComplete="off"
             layout='vertical'
           >

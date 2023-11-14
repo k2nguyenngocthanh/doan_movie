@@ -11,7 +11,7 @@ export default function Header() {
         <span className='font-medium text-2xl text-red-500 animate-pulse'>TT-Film</span>
         </NavLink>
         <NavMenu/>
-        {/* <UserMenu/> */}
+        <UserMenu/>
         
     </div>
   </div>
