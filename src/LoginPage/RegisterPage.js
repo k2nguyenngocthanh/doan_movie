@@ -1,8 +1,11 @@
+/** @format */
+
 import Lottie from "lottie-react";
-import bg_animate from "../asset/login_animate.json"
-import { Button, Form, Input, message } from "antd";
+import bg_animate from "../asset/login_animate.json";
+import { Button, Form, Input, Upload, message } from "antd";
 import { useNavigate } from "react-router-dom";
 import { userServ } from "../Service/userService";
+import { UploadOutlined } from "@ant-design/icons";
 
 const formItemLayout = {
   labelCol: {
@@ -38,18 +41,35 @@ const tailFormItemLayout = {
 const RegisterPage = () => {
   let navigate = useNavigate();
   const [form] = Form.useForm();
+
   const onFinish = (values) => {
     userServ
       .postRegister(values)
       .then((res) => {
-        console.log(res);
+        console.log("Value: ", values);
+        console.log("Result: ", res);
         message.success("Đăng ký thành công");
         navigate("/login");
       })
       .catch((err) => {
-        console.log(err);
+        console.log("err", err);
         message.error(err.response.data.content);
       });
+  };
+
+  const props = {
+    name: "avatar_img",
+    action: "https://run.mocky.io/v3/435e224c-44fb-4773-9faf-380c5e6a2188",
+    onChange(info) {
+      if (info.file.status !== "uploading") {
+        console.log(info.file, info.fileList);
+      }
+      if (info.file.status === "done") {
+        message.success(`${info.file.name} file uploaded successfully`);
+      } else if (info.file.status === "error") {
+        message.error(`${info.file.name} file upload failed.`);
+      }
+    },
   };
 
   return (
@@ -111,7 +131,7 @@ const RegisterPage = () => {
 
             <Form.Item
               name="mat_khau"
-              label="Confirm Password"
+              label="Confirm Pass"
               dependencies={["mat_khau"]}
               hasFeedback
               rules={[
@@ -137,13 +157,12 @@ const RegisterPage = () => {
             </Form.Item>
 
             <Form.Item
-              name="tai_khoan"
-              label="Nickname"
-              tooltip="What do you want others to call you?"
+              name="ho_ten"
+              label="Full name"
               rules={[
                 {
                   required: true,
-                  message: "Please input your nickname!",
+                  message: "Please input your full name!",
                   whitespace: true,
                 },
               ]}
@@ -151,13 +170,12 @@ const RegisterPage = () => {
               <Input />
             </Form.Item>
             <Form.Item
-              name="ho_ten"
-              label="Full Name"
-              tooltip="What do you want others to call you?"
+              name="so_dt"
+              label="Phone number"
               rules={[
                 {
                   required: true,
-                  message: "Please input your Fullname!",
+                  message: "Please input your phone number!",
                   whitespace: true,
                 },
               ]}
@@ -165,21 +183,10 @@ const RegisterPage = () => {
               <Input />
             </Form.Item>
 
-            <Form.Item
-              name="so_dt"
-              label="Phone Number"
-              rules={[
-                {
-                  required: true,
-                  message: "Please input your phone number!",
-                },
-              ]}
-            >
-              <Input
-                style={{
-                  width: "100%",
-                }}
-              />
+            <Form.Item name="avatar_img" label="Avatar image">
+              <Upload {...props}>
+                <Button icon={<UploadOutlined />}>Click to Upload</Button>
+              </Upload>
             </Form.Item>
 
             <Form.Item {...tailFormItemLayout}>
@@ -197,5 +204,3 @@ const RegisterPage = () => {
   );
 };
 export default RegisterPage;
-
-  

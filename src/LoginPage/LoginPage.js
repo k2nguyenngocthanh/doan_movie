@@ -1,26 +1,29 @@
+/** @format */
+
 import { Button, Form, Input, message } from "antd";
 import Lottie from "lottie-react";
 import { NavLink, useNavigate } from "react-router-dom";
 import bg_animate from "../asset/login_animate.json";
 import { useDispatch } from "react-redux";
-
-import {setLoginAction,setLoginActionService} from "../Redux/action/userAction";
+import {
+  setLoginAction,
+  setLoginActionService,
+} from "../Redux/action/userAction";
 import { userServ } from "../Service/userService";
 import { localUserSrv } from "../Service/localService";
-
 
 const LoginPage = () => {
   let dispatch = useDispatch();
   let navigate = useNavigate();
+
   const onFinish = (values) => {
     userServ
       .postLogin(values)
       .then((res) => {
-        console.log(res);
-        message.success("Login thành công");
         //Lưu thông tin
-        localUserSrv.set(res.data.content);
-        dispatch(setLoginAction(res.data.content));
+        localUserSrv.set(values);
+        dispatch(setLoginAction(values));
+        message.success("Login thành công");
         navigate("/");
       })
       .catch((err) => {
@@ -31,23 +34,27 @@ const LoginPage = () => {
   const OnFinishThunk = (values) => {
     let onSuccess = () => {
       message.success("Login thành công");
-
       navigate("/");
     };
-
     dispatch(setLoginActionService(values, onSuccess));
   };
   const onFinishFailed = (errorInfo) => {
     console.log("Failed:", errorInfo);
   };
-  return( <div style={{backgroundImage:`url('http://demo1.cybersoft.edu.vn/static/media/backapp.b46ef3a1.jpg')`}} className="h-screen w-screen flex  justify-center items-center">
+  return (
+    <div
+      style={{
+        backgroundImage: `url('http://demo1.cybersoft.edu.vn/static/media/backapp.b46ef3a1.jpg')`,
+      }}
+      className="h-screen w-screen flex  justify-center items-center"
+    >
       <div className="container mx-auto p-5 bg-white rounded flex">
-      <div className="w-1/2 h-full">
-      <Lottie animationData={bg_animate} loop={true} />
+        <div className="w-1/2 h-full">
+          <Lottie animationData={bg_animate} loop={true} />
         </div>
-      <div className="w-1/2 h-full">
-        <p className='text-2xl text-center mb-4' >Đăng Nhập</p>
-      <Form
+        <div className="w-1/2 h-full">
+          <p className="text-2xl text-center mb-4">Đăng Nhập</p>
+          <Form
             name="basic"
             labelCol={{
               span: 8,
@@ -56,7 +63,7 @@ const LoginPage = () => {
               span: 24,
             }}
             style={{
-              width:"100%"
+              width: "100%",
             }}
             initialValues={{
               remember: true,
@@ -64,15 +71,15 @@ const LoginPage = () => {
             onFinish={onFinish}
             onFinishFailed={onFinishFailed}
             autoComplete="off"
-            layout='vertical'
+            layout="vertical"
           >
             <Form.Item
-              label="Username"
-              name="taiKhoan"
+              label="Email"
+              name="email"
               rules={[
                 {
                   required: true,
-                  message: 'Please input your username!',
+                  message: "Please input your username!",
                 },
               ]}
             >
@@ -80,11 +87,11 @@ const LoginPage = () => {
             </Form.Item>
             <Form.Item
               label="Password"
-              name="matKhau"
+              name="mat_khau"
               rules={[
                 {
                   required: true,
-                  message: 'Please input your password!',
+                  message: "Please input your password!",
                 },
               ]}
             >
@@ -92,21 +99,31 @@ const LoginPage = () => {
             </Form.Item>
             <Form.Item
               wrapperCol={{
-              
                 span: 24,
               }}
               className="flex justify-center items-center"
             >
-              <Button className="bg-orange-500 hover:text-white hover:border-hidden" htmlType="submit">
+              <Button
+                className="bg-orange-500 hover:text-white hover:border-hidden"
+                htmlType="submit"
+              >
                 Submit
               </Button>
-              <br /><br />
-              <span  > Bạn chưa có tài khoản ? <NavLink className='text-red-500' to="/register"> <u>Đăng kí tại đây</u></NavLink> </span>
+              <br />
+              <br />
+              <span>
+                {" "}
+                Bạn chưa có tài khoản ?{" "}
+                <NavLink className="text-red-500" to="/register">
+                  {" "}
+                  <u>Đăng kí tại đây</u>
+                </NavLink>{" "}
+              </span>
             </Form.Item>
           </Form>
         </div>
-          
       </div>
-  </div>
-)};
+    </div>
+  );
+};
 export default LoginPage;

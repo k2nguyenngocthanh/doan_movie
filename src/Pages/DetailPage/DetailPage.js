@@ -17,7 +17,6 @@ export default function DetailPage() {
     let fetchDetail = async () => {
       try {
         let result = await movieServ.getDetailMovie(id);
-        console.log("Result: ", result.data);
         setMovie(result.data);
       } catch (error) {
         console.log(error);
@@ -70,14 +69,12 @@ export default function DetailPage() {
             </h1>
             <br />
             <br />
-            <Route path="/bookingTicket" to={<BookingPage />}>
-              <a
-                href="#DatVe"
-                className="rounded px-5 py-2 bg-red-600 text-white font-medium "
-              >
-                Mua vé
-              </a>
-            </Route>
+            <a
+              href="#DatVe"
+              className="rounded px-5 py-2 bg-red-600 text-white font-medium "
+            >
+              Mua vé
+            </a>
           </div>
         </div>
         <br />
