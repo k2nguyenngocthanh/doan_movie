@@ -1,3 +1,5 @@
+/** @format */
+
 import React, { useEffect, useState } from "react";
 import { movieServ } from "../../../Service/movieService";
 import { Tabs } from "antd";
@@ -57,14 +59,14 @@ export default function TabsMovie() {
   };
   return (
     <div id="lichChieu" className="container ">
-      <h2 className="text-4xl uppercase font-bold text-center mb-4 mt-4">
+      {/* <h2 className="text-4xl uppercase font-bold text-center mb-4 mt-4">
         Lịch Chiếu
       </h2>
       <div className="bg-white p-1 sm:p-5 rounded-lg w-100">
         <Tabs>
 
         </Tabs>
-      </div>
+      </div> */}
     </div>
   );
 }
