@@ -1,0 +1,27 @@
+.informationTable {
+    width: 50%;
+  }
+  
+  .informationTable thead th,
+  .informationTable tbody td {
+    border: 2px solid #fff;
+    border-collapse: collapse;
+    background-color:greenyellow;
+  }
+  
+  .informationTable td {
+    padding: 6px 0;
+    white-space: pre;
+  }
+  
+  .informationTable button {
+    border: 1px solid red;
+    border-radius: 4px;
+    background-color: red;
+    color: #fff;
+  }
+  
+  .informationTable button:hover {
+    background-color: red;
+    color: #fff;
+  }

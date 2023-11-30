@@ -46,8 +46,6 @@ const RegisterPage = () => {
     userServ
       .postRegister(values)
       .then((res) => {
-        console.log("Value: ", values);
-        console.log("Result: ", res);
         message.success("Đăng ký thành công");
         navigate("/login");
       })

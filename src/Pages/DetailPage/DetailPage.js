@@ -70,7 +70,7 @@ export default function DetailPage() {
             <br />
             <br />
             <a
-              href="#DatVe"
+              href="/booking"
               className="rounded px-5 py-2 bg-red-600 text-white font-medium "
             >
               Mua vé

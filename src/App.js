@@ -8,6 +8,7 @@ import RegisterPage from "./LoginPage/RegisterPage";
 import HomePage from "./Pages/HomePage/HomePage";
 import DetailPage from "./Pages/DetailPage/DetailPage";
 import NotFoundPage from "./Pages/NotFoundPage/NotFoundPage";
+import BookingPage from "./Pages/BookingPage/BookingPage";
 
 function App() {
   return (
@@ -27,10 +28,7 @@ function App() {
             path="/detail/:id"
             element={<Layout Component={DetailPage} />}
           />
-          {/* <Route
-            path="/booking/:id"
-            element={<Layout Component={BookingPage} />}
-          /> */}
+          <Route path="/booking" element={<Layout Component={BookingPage} />} />
           <Route path="*" element={<Layout Component={NotFoundPage} />} />
         </Routes>
       </BrowserRouter>
