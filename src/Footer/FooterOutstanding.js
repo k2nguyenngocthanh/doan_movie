@@ -1,9 +1,11 @@
+/** @format */
+
 import React from "react";
 
 const FooterOutstanding = () => {
   return (
     <div className="bg-gray-900">
-      <div className="container flex flex-col sm:flex-row justify-center items-center space-y-5 sm:space-y-0 sm:space-x-20 py-10 text-center">
+      <div className="flex flex-col sm:flex-row justify-center items-center space-y-5 sm:space-y-0 sm:space-x-20 py-10 text-center">
         <div className="flex flex-col items-center justify-center ">
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -37,7 +39,9 @@ const FooterOutstanding = () => {
             />
           </svg>
 
-          <span className="text-sm md:text-base">RESEND BOOKING CONFIRMATION</span>
+          <span className="text-sm md:text-base">
+            RESEND BOOKING CONFIRMATION
+          </span>
         </div>
         <div className="flex flex-col items-center justify-center">
           <svg

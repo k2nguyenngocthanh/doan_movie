@@ -1,7 +1,7 @@
 /** @format */
 
 import React, { useEffect, useState } from "react";
-import { Route, useParams } from "react-router-dom";
+import { NavLink, Route, useParams } from "react-router-dom";
 import { movieServ } from "../../Service/movieService";
 import moment from "moment/moment";
 import { Progress, Rate } from "antd";
@@ -69,19 +69,13 @@ export default function DetailPage() {
             </h1>
             <br />
             <br />
-            <a
-              href="/booking"
-              className="rounded px-5 py-2 bg-red-600 text-white font-medium "
-            >
-              Mua vé
-            </a>
+            <NavLink to={`/detail/${movie.ma_phim}/booking`}>
+              <a className="px-5 py-2 bg-red-600 text-white font-medium rounded-lg">
+                Mua vé
+              </a>
+            </NavLink>
           </div>
         </div>
-        <br />
-        <br />
-        <hr />
-        <br />
-        <br />
         {/* <div className="mt-20 ml-72 w-2/3 container bg-white px-5 py-5">
           <ShowTime />
         </div> */}

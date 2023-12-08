@@ -9,6 +9,9 @@ import HomePage from "./Pages/HomePage/HomePage";
 import DetailPage from "./Pages/DetailPage/DetailPage";
 import NotFoundPage from "./Pages/NotFoundPage/NotFoundPage";
 import BookingPage from "./Pages/BookingPage/BookingPage";
+import { Stepper, initTE } from "tw-elements";
+import PayPage from "./Pages/PayPage/PayPage";
+initTE({ Stepper });
 
 function App() {
   return (
@@ -28,7 +31,14 @@ function App() {
             path="/detail/:id"
             element={<Layout Component={DetailPage} />}
           />
-          <Route path="/booking" element={<Layout Component={BookingPage} />} />
+          <Route
+            path="/detail/:id/booking"
+            element={<Layout Component={BookingPage} />}
+          />
+          <Route
+            path="/detail/:id/booking/pay"
+            element={<Layout Component={PayPage} />}
+          />
           <Route path="*" element={<Layout Component={NotFoundPage} />} />
         </Routes>
       </BrowserRouter>
