@@ -4,14 +4,16 @@ import { connect, useSelector } from "react-redux";
 import momo from "../../img/MoMo.png";
 import vnpay from "../../img/qr.jpg";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { message } from "antd";
+import { localUserSrv } from "../../Service/localService";
 
 function PayPage() {
   let itemData = useSelector((state) => state.seatReducer.seatSelected);
   let [checked, setChecked] = useState(null);
-  const [totalSeconds, setTotalSeconds] = useState(120);
+  const [totalSeconds, setTotalSeconds] = useState(3000);
   const [minutes, setMinutes] = useState(Math.floor(totalSeconds / 60));
   const [seconds, setSeconds] = useState(totalSeconds % 60);
-  const [message, setMessage] = useState("");
 
   let renderInfo = () => {
     return itemData.map((item) => {
@@ -41,12 +43,15 @@ function PayPage() {
     setChecked(value);
   };
 
+  let navigate = useNavigate();
+
   useEffect(() => {
     const interval = setInterval(() => {
       setTotalSeconds((prevTotalSeconds) => {
         if (prevTotalSeconds === 0) {
           clearInterval(interval);
-          setMessage("Time is up!");
+          message.error("Hết thời gian chờ. Vui lòng đặt lại");
+          navigate("/");
           return 0;
         } else {
           const newMinutes = Math.floor(prevTotalSeconds / 60);
@@ -61,17 +66,21 @@ function PayPage() {
     return () => clearInterval(interval);
   }, []);
 
+  const storedUser = localStorage.getItem("USER_INFOR");
+  const isLoggedIn = Boolean(storedUser);
+
+  console.log(isLoggedIn);
   return (
     <div className="container">
       <div className="grid grid-cols-2">
-        <div className="grid grid-rows-3">
+        <div className="grid grid-rows-2">
           <div className="infoTicket">
             <div className="card-header-title text-muted bg-slate-300 rounded-t-lg pl-2 text-lg text-slate-400">
               Tóm tắt đơn hàng
             </div>
             <div className="card">
               <div className="card-header">
-                <table className="w-full text-center" border="1">
+                <table className="w-full text-center border-white">
                   <thead>
                     <tr className="uppercase bg-slate-200 text-gray-500">
                       <th>Số ghế</th>
@@ -100,7 +109,7 @@ function PayPage() {
             <div className="card">
               <div className="card-header">
                 <div>
-                  <div className="flex items-center mb-4">
+                  {/* <div className="flex items-center mb-4">
                     <input
                       id="checkbox"
                       type="checkbox"
@@ -119,7 +128,7 @@ function PayPage() {
                     >
                       Momo
                     </label>
-                  </div>
+                  </div> */}
                   <div className="flex items-center">
                     <input
                       id="checked-checkbox"
@@ -142,17 +151,17 @@ function PayPage() {
             </div>
           </div>
 
-          <div className="infoUser mt-10">
+          {isLoggedIn ? (<></>) : (<div className="infoUser mt-10">
             <div className="card-header-title text-muted bg-slate-300 rounded-t-lg pl-2 text-lg text-slate-400">
               Thông tin cá nhân
             </div>
             <div className="card">
               <div className="card-header">
                 <div>
-                  <div className="mb-6">
+                  <div className="mb-3">
                     <label
                       htmlFor="name-input"
-                      className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                      className="block mb-2 text-sm font-medium text-white dark:text-white"
                     >
                       Họ và tên
                     </label>
@@ -165,10 +174,10 @@ function PayPage() {
                     />
                   </div>
                 </div>
-                <div className="mb-6">
+                <div className="mb-2">
                   <label
                     htmlFor="email-input"
-                    className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                    className="block mb-2 text-sm font-medium text-white dark:text-white"
                   >
                     E-mail
                   </label>
@@ -180,10 +189,10 @@ function PayPage() {
                     className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                   />
                 </div>
-                <div className="mb-6">
+                <div className="mb-2">
                   <label
                     htmlFor="phone-input"
-                    className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                    className="block mb-2 text-sm font-medium text-white dark:text-white"
                   >
                     Số điện thoại
                   </label>
@@ -197,7 +206,8 @@ function PayPage() {
                 </div>
               </div>
             </div>
-          </div>
+          </div>)}
+
         </div>
         <div className="rightInfo ml-8">
           <div>
@@ -228,10 +238,10 @@ function PayPage() {
           </div>
           <div className="mt-4">
             <a className="block max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
-              <p className="text-white mb-2">
+              <p className="text-black mb-2">
                 Vé đã mua không thể đổi hoặc hoàn tiền.
               </p>
-              <p className="text-white">
+              <p className="text-black">
                 Mã vé sẽ được gửi 01 lần qua số điện thoại và email đã nhập. Vui
                 lòng kiểm tra lại thông tin trước khi tiếp tục.
               </p>

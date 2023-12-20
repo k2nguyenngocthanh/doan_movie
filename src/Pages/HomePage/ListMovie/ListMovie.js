@@ -17,7 +17,7 @@ export default function ListMovie() {
       });
   }, []);
   return (
-    <div id="listMovie">
+    <div id="listMovie" className="pt-4">
       <h2 className="text-3xl sm:text-4xl uppercase font-bold text-center mb-4 mt-10">
         Hot Movies
       </h2>

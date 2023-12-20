@@ -40,7 +40,7 @@ export default function DetailPage() {
             <div className="grid grid-cols-3">
               <img
                 className="col-span-1 "
-                src={movie.hinh_anh}
+                src={`http://localhost:8080/public/movie_img/${movie.hinh_anh}`}
                 style={{ width: "100%", height: 300 }}
               />
               <div className="col-span-2 ml-5 " style={{ marginTop: "25%" }}>
@@ -48,8 +48,8 @@ export default function DetailPage() {
                   Ngày chiếu:{" "}
                   {moment(movie.ngay_khoi_chieu).format("DD.MM.YYYY")}
                 </p>
-                <p className="text-4xl text ">{movie.ten_phim}</p>
-                <p>{movie.mo_ta?.substring(0, 100)} ...</p>
+                <p className="text-4xl text uppercase mt-4 mb-4 text-white">{movie.ten_phim}</p>
+                <p>{movie.mo_ta?.substring(0, 150)} ...</p>
               </div>
             </div>
           </div>

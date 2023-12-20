@@ -23,14 +23,14 @@ const CarouselHomepage = () => {
     return banner.map((item, index) => {
       return (
         <div key={index}>
-          <img className="h-80 w-full" src={item?.hinh_anh} />
+          <img  className="w-full aspect-w-16 aspect-h-9 object-fill h-96" src={`http://localhost:8080/public/banner_img/${item.hinh_anh}`} alt="" />
         </div>
       );
     });
   };
 
   return (
-    <div className="h-80 w-full">
+    <div className="h-full w-full">
       <Carousel autoplay>{renderBanner()}</Carousel>
     </div>
   );

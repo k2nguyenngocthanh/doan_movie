@@ -31,13 +31,6 @@ const LoginPage = () => {
         message.error("Login thất bại");
       });
   };
-  const OnFinishThunk = (values) => {
-    let onSuccess = () => {
-      message.success("Login thành công");
-      navigate("/");
-    };
-    dispatch(setLoginActionService(values, onSuccess));
-  };
   const onFinishFailed = (errorInfo) => {
     console.log("Failed:", errorInfo);
   };

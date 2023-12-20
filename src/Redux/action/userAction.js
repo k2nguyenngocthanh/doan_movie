@@ -12,13 +12,13 @@ export const setLoginAction = (value) =>{
         payload:value,
       }
 }
+
 export const setLoginActionService = (value,onCompleted) => {
     //value đến thẻ form của antd
     return (dispatch) => {
       userServ
         .postLogin(value)
         .then((res) => {
-         
           console.log(res);
           dispatch({
             type: USER_LOGIN,

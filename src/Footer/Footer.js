@@ -7,7 +7,7 @@ import FooterCopyright from "./FooterCopyright";
 
 export default function Footer() {
   return (
-    <div className="mt-10 container">
+    <div className="pt-10">
       <FooterOutstanding />
       <div className="grid grid-cols-2 mt-8">
         <div>
